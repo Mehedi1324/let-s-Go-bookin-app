@@ -3,7 +3,7 @@ import {
   FaBed,
   FaPlane,
   FaCarSide,
-  FaTelegramPlane,
+  FaPlaneDeparture,
   FaRegCalendarAlt,
   FaMale,
 } from 'react-icons/fa';
@@ -49,7 +49,7 @@ const HomeBanner = () => {
               more with a free Travel Guru booking account
             </div>
             <div className="w-full text-center">
-              <button className="bg-red-700 hover:bg-slate-900 text-[18px] font-semibold w-[200px] rounded-md h-[45px]">
+              <button className="bg-[#ff0000c6] shadow-custom-dark hover:bg-[#211d1d79] text-[18px] font-semibold w-[200px] rounded-md h-[45px]">
                 Sing in / Register
               </button>
             </div>
@@ -57,16 +57,19 @@ const HomeBanner = () => {
         </div>
       </div>
       {/*_________________ Booking ____________________ */}
-      <div className="absolute right-0 left-0  w-[90%] md:w-[80%] mx-auto  -mt-10 md:-mt-20 lg:-mt-24  p-3 rounded-lg items-center   backdrop-blur-sm backdrop-brightness-75 text-white shadow-custom-gray">
-        <div className="grid justify-between grid-cols-1 gap-6 lg:grid-cols-3">
-          <div className="flex items-center w-full space-x-3">
-            <FaTelegramPlane className="text-[35px]" />{' '}
+      <div className="absolute z-10 right-0 left-0  w-[95%]  md:w-[90%] mx-auto  -mt-20 md:-mt-18 lg:-mt-16  p-3 rounded-lg items-center bg-[#1d5d5e3d]  backdrop-blur-lg backdrop-brightness-75 text-white shadow-custom-gray">
+        {/* Wrapper of all the booking comp. */}
+        <div className="grid justify-between grid-cols-1 gap-x-10 gap-y-4 lg:grid-cols-2">
+          {/*____________ Select Place_________ */}
+          <div className="inline-flex items-center space-x-3">
+            <FaPlaneDeparture className="text-[35px]" />{' '}
             <input
-              className="w-full h-10 p-2 text-black rounded-md"
+              className="w-full h-10 p-2 font-semibold text-black rounded-md"
               type="text"
               placeholder="Where are you going ?"
             />
           </div>
+          {/* Select date__________________________ */}
           <div className="relative flex items-center space-x-3">
             <FaRegCalendarAlt className="text-[35px]" />{' '}
             <input
@@ -88,45 +91,47 @@ const HomeBanner = () => {
                   onChange={(item) => setDate([item.selection])}
                   moveRangeOnFirstSelection={false}
                   ranges={date}
-                  className="absolute z-10 top-10 left-8 lg:left-2"
+                  className="absolute z-10 top-10 left-11 "
                 />
               </div>
             )}
           </div>
+
+          {/* Select rooms and members____________________ */}
           <div className="flex cursor-pointer relative text-[18px] font-semibold items-center w-full ">
             <FaMale className="text-[35px]" />{' '}
             <div
-              className="space-x-3"
+              className="ml-3 space-x-3"
               onClick={() => {
                 setOpenOptions(!openOptions);
                 setShowDatePicker(false);
               }}
             >
               <span>
-                <span className="text-purple-500 font-bold text-[20px]">
+                <span className="text-yellow-400 font-bold text-[22px]">
                   {options.adult}
                   {''}
                 </span>
-                adult
+                <span className=" lg:text-lg"> adult </span>
               </span>
               <span>
-                <span className="text-purple-500 font-bold text-[20px]">
+                <span className="text-yellow-400 font-bold text-[22px]">
                   {options.children}
                 </span>
-                children
+                <span className=" lg:text-lg"> children </span>
               </span>
               <span>
-                <span className="text-purple-500 font-bold text-[20px]">
+                <span className="text-yellow-400 font-bold text-[22px]">
                   {options.room}
                 </span>
-                room
-                <button className="px-2 py-1 ml-3 bg-red-500 rounded-sm">
-                  Search
-                </button>
+                <span className=" lg:text-lg"> room </span>
               </span>
+              <button className="float-right px-5 shadow-custom-dark hover:bg-[#211d1d79] py-1 ml-3 bg-[#ff0000c6] rounded-sm backdrop-blur-sm">
+                Search
+              </button>
             </div>
             {openOptions && (
-              <div className="absolute left-0 right-0 p-3 bg-black top-10 options">
+              <div className="absolute right-0 p-3 space-y-3 bg-black rounded-md -left-3 md:right-10 top-12 options">
                 <div className="-mt-3 -mr-3 text-right">
                   <span
                     onClick={() => setOpenOptions(false)}
@@ -139,13 +144,17 @@ const HomeBanner = () => {
                   <span>Aduls</span>
                   <div className="space-x-5">
                     <button
+                      className="px-2 text-[18px] font-bold text-black bg-white"
                       disabled={options.adult <= 1}
                       onClick={() => handleOption('adult', 'd')}
                     >
                       -
                     </button>
                     <span>{options.adult}</span>
-                    <button onClick={() => handleOption('adult', 'i')}>
+                    <button
+                      className="px-2 text-[18px] font-bold text-black bg-white"
+                      onClick={() => handleOption('adult', 'i')}
+                    >
                       +
                     </button>
                   </div>
@@ -154,13 +163,17 @@ const HomeBanner = () => {
                   <span>Children</span>
                   <div className="space-x-5">
                     <button
+                      className="px-2 text-[18px] font-bold text-black bg-white"
                       disabled={options.children <= 0}
                       onClick={() => handleOption('children', 'd')}
                     >
                       -
                     </button>
                     <span>{options.children}</span>
-                    <button onClick={() => handleOption('children', 'i')}>
+                    <button
+                      className="px-2 text-[18px] font-bold text-black bg-white"
+                      onClick={() => handleOption('children', 'i')}
+                    >
                       +
                     </button>
                   </div>
@@ -169,13 +182,19 @@ const HomeBanner = () => {
                   <span>Rooms</span>
                   <div className="space-x-5">
                     <button
+                      className="px-2 text-[18px] font-bold text-black bg-white"
                       disabled={options.room <= 1}
                       onClick={() => handleOption('room', 'd')}
                     >
                       -
                     </button>
                     <span>{options.room}</span>
-                    <button onClick={() => handleOption('room', 'i')}>+</button>
+                    <button
+                      className="px-2 text-[18px] font-bold text-black bg-white"
+                      onClick={() => handleOption('room', 'i')}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
               </div>

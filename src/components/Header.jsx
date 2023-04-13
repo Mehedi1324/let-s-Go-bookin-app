@@ -11,15 +11,15 @@ import { AiOutlineMenu } from 'react-icons/ai';
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   return (
-    <div className="fixed top-0 left-0 right-0 z-10 text-white backdrop-blur-sm backdrop-brightness-50">
+    <div className="fixed top-0 left-0 right-0 z-20 text-white backdrop-blur-sm backdrop-brightness-50">
       <div className="w-[100%] mx-auto p-2 border-b-[1px]  backdrop-blur-sm backdrop-brightness-50 border-gray-500">
         <div className="flex items-center justify-between ">
           <img className="w-[90px]" src="/images/logo.png" alt="" />
           <div className={` flex text-[17px] font-bold space-x-2 `}>
-            <button className="bg-orange-800 hover:bg-slate-800 w-[85px] h-9 rounded-sm">
+            <button className="bg-[#ff00009d] shadow-custom-dark hover:bg-[#211d1d79] w-[85px] h-9 rounded-sm">
               Register
             </button>
-            <button className="rounded-sm hover:bg-slate-800 bg-orange-800 w-[85px] h-9">
+            <button className="rounded-sm bg-[#ff00009d] shadow-custom-dark hover:bg-[#211d1d79] w-[85px] h-9">
               Login
             </button>
           </div>
