@@ -11,9 +11,13 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 const HomeBanner = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [destination, setDestination] = useState('');
   const [openOptions, setOpenOptions] = useState(false);
+  const navigate = useNavigate();
+
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
@@ -35,21 +39,27 @@ const HomeBanner = () => {
       key: 'selection',
     },
   ]);
+
+  // Send data to hotel page on clicking search btn__________
+
+  const handleSearch = () => {
+    navigate('/hotels', { state: { destination, date, options } });
+  };
   return (
     <div className="bg-gradient-to-t from-gray-900  to-gray-800 h-[550px] ">
       <div className=" flex backdrop-blur-sm justify-center h-full opacity-60 flex-col items-center text-white w-full  bg-[url('/images/bg.png')] bg-cover bg-center">
         <div className="w-full space-y-10">
           {/* ___________________Title_____________________ */}
           <div className="space-y-5">
-            <h1 className="text-[35px] text-center md:text-[40px] lg:text-[50px]  text-white-900 font-bold">
+            <h1 className="text-[35px] font-kaushan text-center md:text-[40px] lg:text-[50px]  text-white-900 font-bold">
               A lifetime of discounts ? Is's Genius.
             </h1>
-            <div className="text-[23px] md:text-[18px] hidden md:block font-kaushan font-semibold text-center">
+            <div className="text-[25px] md:text-[18px] hidden md:block font-kaushan text-center">
               Get rewarded for your travels -unlock instant savings of 10% or
               more with a free Travel Guru booking account
             </div>
             <div className="w-full text-center">
-              <button className="bg-[#ff0000c6] shadow-custom-dark hover:bg-[#211d1d79] text-[18px] font-semibold w-[200px] rounded-md h-[45px]">
+              <button className="bg-blue-500 shadow-custom-dark hover:bg-[#211d1d8b] text-[18px] font-semibold w-[200px] rounded-md h-[45px]">
                 Sing in / Register
               </button>
             </div>
@@ -64,6 +74,7 @@ const HomeBanner = () => {
           <div className="inline-flex items-center space-x-3">
             <FaPlaneDeparture className="text-[35px]" />{' '}
             <input
+              onChange={(e) => setDestination(e.target.value)}
               className="w-full h-10 p-2  text-white/50 bg-[#0000006c] rounded-md"
               type="text"
               placeholder="Where are you going ?"
@@ -126,7 +137,10 @@ const HomeBanner = () => {
                 </span>
                 <span className=" lg:text-lg"> room </span>
               </span>
-              <button className="float-right px-5 shadow-custom-dark hover:bg-[#211d1d79] py-1 ml-3 bg-[#ff0000c6] rounded-sm backdrop-blur-sm">
+              <button
+                onClick={handleSearch}
+                className="float-right px-5 shadow-custom-dark text-[16px] hover:bg-[#211d1d79] py-1 ml-3 bg-blue-500 rounded-full backdrop-blur-sm"
+              >
                 Search
               </button>
             </div>

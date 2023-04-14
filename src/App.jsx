@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import List from './pages/List';
+import HotelLists from './pages/HotelLists';
 import HotelDetails from './pages/HotelDetails';
 import Error from './pages/Error';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -11,10 +12,11 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/hotels" element={<List />} />
+        <Route path="/hotels" element={<HotelLists />} />
         <Route path="/hotels/:id" element={<HotelDetails />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
