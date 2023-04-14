@@ -44,7 +44,7 @@ const HomeBanner = () => {
             <h1 className="text-[35px] text-center md:text-[40px] lg:text-[50px]  text-white-900 font-bold">
               A lifetime of discounts ? Is's Genius.
             </h1>
-            <div className="text-[23px] font-bold text-center">
+            <div className="text-[23px] md:text-[18px] hidden md:block font-kaushan font-semibold text-center">
               Get rewarded for your travels -unlock instant savings of 10% or
               more with a free Travel Guru booking account
             </div>
@@ -57,14 +57,14 @@ const HomeBanner = () => {
         </div>
       </div>
       {/*_________________ Booking ____________________ */}
-      <div className="absolute z-10 right-0 left-0  w-[95%]  md:w-[90%] mx-auto  -mt-20 md:-mt-18 lg:-mt-16  p-3 rounded-lg items-center bg-[#1d5d5e3d]  backdrop-blur-lg backdrop-brightness-75 text-white shadow-custom-gray">
+      <div className="absolute z-10 right-0 left-0 lg:w-[80%]  w-[95%]  md:w-[90%] mx-auto  -mt-20 md:-mt-18 lg:-mt-16  p-3 rounded-lg items-center bg-gray-800 backdrop-blur-sm text-white/90 shadow-custom-gray">
         {/* Wrapper of all the booking comp. */}
         <div className="grid justify-between grid-cols-1 gap-x-10 gap-y-4 lg:grid-cols-2">
           {/*____________ Select Place_________ */}
           <div className="inline-flex items-center space-x-3">
             <FaPlaneDeparture className="text-[35px]" />{' '}
             <input
-              className="w-full h-10 p-2 font-semibold text-black rounded-md"
+              className="w-full h-10 p-2  text-white/50 bg-[#0000006c] rounded-md"
               type="text"
               placeholder="Where are you going ?"
             />
@@ -78,7 +78,7 @@ const HomeBanner = () => {
                 setOpenOptions(false);
               }}
               type="text"
-              className="w-full h-10 p-2 font-semibold text-black rounded-md"
+              className="w-full cursor-pointer bg-[#0000006c] h-10 p-2 font-semibold text-white/50 rounded-md"
               value={`${format(
                 date[0].startDate,
                 'MM/dd/yyyy'
@@ -101,7 +101,7 @@ const HomeBanner = () => {
           <div className="flex cursor-pointer relative text-[18px] font-semibold items-center w-full ">
             <FaMale className="text-[35px]" />{' '}
             <div
-              className="ml-3 space-x-3"
+              className="ml-1 space-x-2"
               onClick={() => {
                 setOpenOptions(!openOptions);
                 setShowDatePicker(false);

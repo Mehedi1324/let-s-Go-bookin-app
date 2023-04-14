@@ -1,12 +1,18 @@
 import React from 'react';
 import HomeBanner from '../components/HomeBanner';
-import Featured from '../components/Featured';
+import TopDestinatins from '../components/TopDestinatins';
+import PropertyTypes from '../components/PropertyTypes';
+import PopularHotels from '../components/PopularHotels';
+import Subscription from '../components/Subscription';
 
 const Home = () => {
   return (
     <div>
       <HomeBanner />
-      <Featured />
+      <TopDestinatins />
+      <PropertyTypes />
+      <PopularHotels />
+      <Subscription />
     </div>
   );
 };
