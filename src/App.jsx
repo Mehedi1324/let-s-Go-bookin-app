@@ -3,20 +3,16 @@ import Home from './pages/Home';
 import HotelLists from './pages/HotelLists';
 import HotelDetails from './pages/HotelDetails';
 import Error from './pages/Error';
-import Header from './components/Header';
-import Footer from './components/Footer';
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/hotels" element={<HotelLists />} />
         <Route path="/hotels/:id" element={<HotelDetails />} />
         <Route path="*" element={<Error />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }

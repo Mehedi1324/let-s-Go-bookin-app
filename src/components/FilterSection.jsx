@@ -1,9 +1,12 @@
-import React from 'react';
+import { format } from 'date-fns';
+import React, { useState } from 'react';
+import { DateRange } from 'react-date-range';
 
-const FilterSection = ({ destinaiton, options, date }) => {
+const FilterSection = ({ destination, options, date }) => {
+  const [openDate, setOpenDate] = useState(false);
   return (
     <div className="p-5 bg-gray-900 md:h-full text-white/50">
-      <div action="" className="space-y-3">
+      <div action="" className="space-y-3 md:sticky top-24">
         <h1 className="text-2xl font-semibold text-white">Search</h1>
         <div className="space-y-2">
           <div className="space-y-1">
@@ -11,14 +14,32 @@ const FilterSection = ({ destinaiton, options, date }) => {
             <input
               className="w-full h-8 px-3 rounded-sm bg-slate-800"
               type="text"
+              placeholder={destination}
             />
           </div>
-          <div className="space-y-1">
+          <div className="relative space-y-1">
             <p className="text-white">Check-in Date</p>
             <input
-              className="w-full h-8 px-3 rounded-sm bg-slate-800"
+              onClick={() => setOpenDate(!openDate)}
+              className="w-full h-8 px-3 rounded-sm cursor-pointer bg-slate-800"
               type="text"
+              value={
+                date === undefined
+                  ? ''
+                  : `${format(
+                      date[0]?.startDate,
+                      'MM/dd/yyyy'
+                    )} ${''} to ${''} ${format(date[0]?.endDate, 'MM/dd/yyyy')}`
+              }
             />
+            {openDate && (
+              <DateRange
+                onChange={(i) => setDate([i.selection])}
+                minDate={new Date()}
+                ranges={date}
+                className="absolute left-0 top-14"
+              />
+            )}
           </div>
         </div>
         <div>
@@ -38,21 +59,36 @@ const FilterSection = ({ destinaiton, options, date }) => {
             </div>
             <div className="flex justify-between">
               <span className="text-[16px] md:text-[14px] lg:text-[16px]">
-                Adult(per night)
+                Adult
               </span>
-              <input type="number" className="w-[40px] bg-black text-center " />
+              <input
+                min={1}
+                type="number"
+                className="w-[40px] bg-black text-center"
+                placeholder={options?.adult}
+              />
             </div>
             <div className="flex justify-between">
               <span className="text-[16px] md:text-[14px] lg:text-[16px]">
-                Children(per night)
+                Children
               </span>
-              <input type="number" className="w-[40px] bg-black text-center " />
+              <input
+                min={0}
+                type="number"
+                placeholder={options?.children}
+                className="w-[40px] bg-black text-center "
+              />
             </div>
             <div className="flex justify-between">
               <span className="text-[16px] md:text-[14px] lg:text-[16px]">
-                Room(per night)
+                Room
               </span>
-              <input type="number" className="w-[40px] bg-black text-center " />
+              <input
+                min={1}
+                placeholder={options?.room}
+                type="number"
+                className="w-[40px] bg-black text-center "
+              />
             </div>
           </div>
         </div>

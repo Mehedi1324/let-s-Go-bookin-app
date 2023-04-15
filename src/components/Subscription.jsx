@@ -2,7 +2,7 @@ import React from 'react';
 
 const Subscription = () => {
   return (
-    <div className="mt-10 text-white flex flex-col justify-center items-center bg-gray-900 w-full h-[180px]">
+    <div className="border-t-[1px] border-white/90 text-white flex flex-col justify-center items-center bg-gray-900 w-full h-[180px]">
       <div className="w-[80%] md:w-[60%] lg:w-[50%] space-y-3 text-center">
         <div className="text-[20px] font-semibold">Save time, save money!</div>
         <p className="text-[14px]">
