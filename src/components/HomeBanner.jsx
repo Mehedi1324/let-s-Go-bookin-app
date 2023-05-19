@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   FaBed,
   FaPlane,
@@ -12,12 +12,15 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
+import { SearchContext } from '../context/SearchContext';
+import { AuthContext } from '../context/AuthContext';
 const HomeBanner = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [destination, setDestination] = useState('');
   const [openOptions, setOpenOptions] = useState(false);
   const navigate = useNavigate();
-
+  const { dispatch } = useContext(SearchContext);
+  const { user } = useContext(AuthContext);
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
@@ -43,6 +46,7 @@ const HomeBanner = () => {
   // Send data to hotel page on clicking search btn__________
 
   const handleSearch = () => {
+    dispatch({ type: 'NEW_SEARCH', payload: { destination, date, options } });
     navigate('/hotels', { state: { destination, date, options } });
   };
   return (
@@ -58,11 +62,13 @@ const HomeBanner = () => {
               Get rewarded for your travels -unlock instant savings of 10% or
               more with a free Travel Guru booking account
             </div>
-            <div className="w-full text-center">
-              <button className="bg-blue-500 shadow-custom-dark hover:bg-[#211d1d8b] text-[18px] font-semibold w-[200px] rounded-md h-[45px]">
-                Sing in / Register
-              </button>
-            </div>
+            {!user && (
+              <div className="w-full text-center">
+                <button className="bg-blue-500 shadow-custom-dark hover:bg-[#211d1d8b] text-[18px] font-semibold w-[200px] rounded-md h-[45px]">
+                  Sing in / Register
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -88,6 +94,7 @@ const HomeBanner = () => {
                 setShowDatePicker(!showDatePicker);
                 setOpenOptions(false);
               }}
+              readOnly
               type="text"
               className="w-full cursor-pointer bg-[#0000006c] h-10 p-2 font-semibold text-white/50 rounded-md"
               value={`${format(

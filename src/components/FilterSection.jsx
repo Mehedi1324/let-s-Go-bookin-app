@@ -2,7 +2,16 @@ import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { DateRange } from 'react-date-range';
 
-const FilterSection = ({ destination, options, date }) => {
+const FilterSection = ({
+  destination,
+  options,
+  date,
+  min,
+  setMin,
+  max,
+  setMax,
+  handleClick,
+}) => {
   const [openDate, setOpenDate] = useState(false);
   return (
     <div className="p-5 bg-gray-900 md:h-full text-white/50">
@@ -23,6 +32,7 @@ const FilterSection = ({ destination, options, date }) => {
               onClick={() => setOpenDate(!openDate)}
               className="w-full h-8 px-3 rounded-sm cursor-pointer bg-slate-800"
               type="text"
+              readOnly
               value={
                 date === undefined
                   ? ''
@@ -49,13 +59,21 @@ const FilterSection = ({ destination, options, date }) => {
               <span className="text-[16px] md:text-[14px] lg:text-[16px]">
                 Min price(per night)
               </span>
-              <input type="number" className="w-[40px] bg-black text-center " />
+              <input
+                onChange={(e) => setMin(e.target.value)}
+                type="number"
+                className="w-[40px] bg-black text-center "
+              />
             </div>
             <div className="flex justify-between">
               <span className="text-[16px] md:text-[14px] lg:text-[16px]">
                 Max price(per night)
               </span>
-              <input type="number" className="w-[40px] bg-black text-center " />
+              <input
+                onChange={(e) => setMax(e.target.value)}
+                type="number"
+                className="w-[40px] bg-black text-center "
+              />
             </div>
             <div className="flex justify-between">
               <span className="text-[16px] md:text-[14px] lg:text-[16px]">
@@ -95,6 +113,7 @@ const FilterSection = ({ destination, options, date }) => {
         <div className="pt-7">
           <input
             type="submit"
+            onClick={handleClick}
             className="w-full font-semibold text-white bg-blue-700 rounded-sm cursor-pointer shadow-custom-light hover:bg-gray-800 h-9"
             value="Search"
           />

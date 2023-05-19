@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   FaBed,
   FaPlane,
@@ -9,7 +9,9 @@ import {
 } from 'react-icons/fa';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 const Header = () => {
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   return (
@@ -22,13 +24,29 @@ const Header = () => {
           >
             Let's Go
           </h1>
-          <div className={` flex text-[16px]  space-x-2 `}>
-            <button className="bg-blue-500 shadow-custom-dark hover:bg-[#211d1d79] w-[85px] h-7 rounded-full">
-              Register
-            </button>
-            <button className="bg-blue-500 shadow-custom-dark hover:bg-[#211d1d79] w-[85px] h-7 rounded-full">
-              Login
-            </button>
+          <div className={` flex text-[16px]  items-center space-x-2 `}>
+            <div>
+              {user ? (
+                <h1 className="text-blue-500">{user.username}</h1>
+              ) : (
+                <button className="bg-blue-500 shadow-custom-dark hover:bg-[#211d1d79] w-[85px] h-7 rounded-full">
+                  Register
+                </button>
+              )}
+            </div>
+
+            {user ? (
+              <button className="bg-red-500 shadow-custom-dark hover:bg-[#211d1d79] w-[85px] h-7 rounded-full">
+                Logout
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate('/login')}
+                className="bg-blue-500 shadow-custom-dark hover:bg-[#211d1d79] w-[85px] h-7 rounded-full"
+              >
+                Login
+              </button>
+            )}
           </div>
           <AiOutlineMenu
             onClick={() => setShowMenu(!showMenu)}
