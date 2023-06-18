@@ -15,7 +15,7 @@ const Destinations = () => {
           <div className="absolute top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center text-center text-white bg-black/30 rounded-2xl">
             <div>
               <h1 className="text-[35px] font-semibold pb-4">
-                Up to 50% off on Honeymoon packages
+                Up to 50% off on <br /> Honeymoon packages
               </h1>
               <button className="bg-blue-500  shadow-custom-dark hover:bg-[#211d1d8b] text-[16px] font-semibold px-5 rounded-full py-2">
                 Book Now
