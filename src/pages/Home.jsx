@@ -6,13 +6,16 @@ import PopularHotels from '../components/PopularHotels';
 import Subscription from '../components/Subscription';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Imaginations from '../components/Imaginations';
+import Destinations from '../components/Destinations';
 
 const Home = () => {
   return (
-    <div>
+    <div className="">
       <Header />
       <HomeBanner />
-      <TopDestinatins />
+      <Imaginations />
+      <Destinations />
       <PropertyTypes />
       <PopularHotels />
       <Subscription />

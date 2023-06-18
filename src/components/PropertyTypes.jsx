@@ -13,14 +13,18 @@ const PropertyTypes = () => {
     '/images/cabins.png',
   ];
   return (
-    <div className="w-full">
-      <h3 className="text-[28px] mb-5 text-black/80 font-bold w-[95%] md:w-[90%] mx-auto">
-        Property types
-      </h3>
+    <div className="w-[95%] md:w-[90%] mx-auto space-y-5 pt-10">
+      <div>
+        <h3 className="text-[28px] mb-2 text-black/80 font-bold  mx-auto">
+          Property types
+        </h3>
+        <div className="w-[100px] border-b-[purple] border-[4px] border-blue-400 rounded-lg"></div>
+      </div>
+
       {loading ? (
         'Loading....'
       ) : (
-        <div className="grid grid-cols-3 gap-5 w-[95%] mx-auto md:w-[90%] md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-3 gap-5 mx-auto md:grid-cols-4 lg:grid-cols-5">
           {data &&
             images.map((img, i) => (
               <div

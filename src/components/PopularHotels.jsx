@@ -6,8 +6,9 @@ const PopularHotels = () => {
     'https://letsgo-booking-app.onrender.com/api/hotels?featured=true'
   );
   return (
-    <div className="w-[95%] md:w-[90%] mx-auto mt-10">
-      <h1 className="text-[28px] font-bold">Home guests love</h1>
+    <div className="w-[95%] md:w-[90%] mx-auto pt-[60px]">
+      <h1 className="text-[28px] mb-2 font-bold">Home guests love</h1>
+      <div className="w-[100px] border-b-[purple] border-[4px] border-blue-400 rounded-lg"></div>
       {loading ? (
         'Loading....'
       ) : (
