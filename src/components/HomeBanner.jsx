@@ -12,20 +12,14 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
-import { SearchContext } from '../context/SearchContext';
-import { AuthContext } from '../context/AuthContext';
+import { useBookingDetails } from '../context/SearchContext';
 const HomeBanner = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [destination, setDestination] = useState('');
   const [openOptions, setOpenOptions] = useState(false);
   const navigate = useNavigate();
-  const { dispatch } = useContext(SearchContext);
-  const { user } = useContext(AuthContext);
-  const [options, setOptions] = useState({
-    adult: 1,
-    children: 0,
-    room: 1,
-  });
+
+  const { options, setOptions, date, setDate, destination, setDestination } =
+    useBookingDetails();
   const handleOption = (name, action) => {
     setOptions((prev) => {
       return {
@@ -35,19 +29,14 @@ const HomeBanner = () => {
     });
   };
 
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: 'selection',
-    },
-  ]);
-
   // Send data to hotel page on clicking search btn__________
 
   const handleSearch = () => {
-    dispatch({ type: 'NEW_SEARCH', payload: { destination, date, options } });
-    navigate('/hotels', { state: { destination, date, options } });
+    if (destination.length < 1) {
+      alert('Please fill out where you want to go !');
+    } else {
+      navigate('/hotels');
+    }
   };
   return (
     <div className="bg-gradient-to-t from-gray-900  to-gray-800 h-[550px] ">
@@ -62,17 +51,11 @@ const HomeBanner = () => {
               Get rewarded for your travels -unlock instant savings of 10% or
               more with a free Travel Guru booking account
             </div>
-            {!user && (
-              <div className="w-full text-center">
-                <button className="bg-blue-500 shadow-custom-dark hover:bg-[#211d1d8b] text-[18px] font-semibold w-[200px] rounded-md h-[45px]">
-                  Sing in / Register
-                </button>
-              </div>
-            )}
           </div>
         </div>
       </div>
       {/*_________________ Booking ____________________ */}
+
       <div className="absolute z-10 right-0 left-0 lg:w-[80%]  w-[95%]  md:w-[90%] mx-auto  -mt-20 md:-mt-18 lg:-mt-16  p-3 rounded-lg items-center bg-gray-800 backdrop-blur-sm text-white/90 shadow-custom-gray">
         {/* Wrapper of all the booking comp. */}
         <div className="grid justify-between grid-cols-1 gap-x-10 gap-y-4 lg:grid-cols-2">
@@ -80,10 +63,11 @@ const HomeBanner = () => {
           <div className="inline-flex items-center space-x-3">
             <FaPlaneDeparture className="text-[35px]" />{' '}
             <input
-              onChange={(e) => setDestination(e.target.value)}
+              onChange={(e) => setDestination(e.target.value.toLowerCase())}
               className="w-full h-10 p-2  text-white/50 bg-[#0000006c] rounded-md"
               type="text"
-              placeholder="Where are you going ?"
+              placeholder="Where are you going ? (Dhaka, France, UK, Italy,US, South Korea, thailand and bali ) available right now)"
+              required
             />
           </div>
           {/* Select date__________________________ */}
@@ -144,13 +128,13 @@ const HomeBanner = () => {
                 </span>
                 <span className=" lg:text-lg"> room </span>
               </span>
-              <button
-                onClick={handleSearch}
-                className="float-right px-5 shadow-custom-dark text-[16px] hover:bg-[#211d1d79] py-1 ml-3 bg-blue-500 rounded-full backdrop-blur-sm"
-              >
-                Search
-              </button>
             </div>
+            <button
+              onClick={handleSearch}
+              className="float-right px-5 shadow-custom-dark text-[16px] hover:bg-[#211d1d79] py-1 ml-3 bg-blue-500 rounded-full backdrop-blur-sm"
+            >
+              Search
+            </button>
             {openOptions && (
               <div className="absolute right-0 p-3 space-y-3 bg-black rounded-md -left-3 md:right-10 top-12 options">
                 <div className="-mt-3 -mr-3 text-right">

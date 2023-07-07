@@ -1,41 +1,19 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useContext } from 'react';
+import useStatements from '../hooks/useStatements';
 
-const initialState = {
-  city: undefined,
-  date: [],
-  options: {
-    adult: undefined,
-    children: undefined,
-    room: undefined,
-  },
-};
-
-export const SearchContext = createContext(initialState);
-
-const SearchReducer = (state, action) => {
-  switch (action.type) {
-    case 'NEW_SEARCH':
-      return action.payload;
-    case 'RESET_SEARCH':
-      return initialState;
-    default:
-      return state;
-  }
-};
+export const SearchContext = createContext();
 
 export const SearchContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(SearchReducer, initialState);
-
+  const allValue = useStatements();
   return (
-    <SearchContext.Provider
-      value={{
-        city: state.city,
-        date: state.date,
-        options: state.options,
-        dispatch,
-      }}
-    >
-      {children}
-    </SearchContext.Provider>
+    <SearchContext.Provider value={allValue}>{children}</SearchContext.Provider>
   );
+};
+
+export const useBookingDetails = () => {
+  const context = useContext(SearchContext);
+  if (context === undefined) {
+    throw new Error('useBookingDetails must be used within SearchContext');
+  }
+  return context;
 };

@@ -26,11 +26,17 @@ const Hotels = ({ item, loading }) => {
               <p className="inline px-1 text-white bg-green-800 rounded-sm">
                 {item.distance}m from center
               </p>
-
+              <p>
+                <span className="font-bold text-blue-800"> Destination : </span>
+                <span className="font-semibold">
+                  {' '}
+                  {item.city.charAt(0).toUpperCase() + item.city.slice(1)}
+                </span>
+              </p>
               <p className="font-bold text-[14px]">
                 Studio Apartment with Air conditioning
               </p>
-              <p>{item.description}</p>
+              <p className="hidden lg:block">{item.description}</p>
               <p className="font-semibold text-green-600">Free cancellation</p>
             </div>
           </div>

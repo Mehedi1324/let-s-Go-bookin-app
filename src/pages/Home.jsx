@@ -10,8 +10,10 @@ import Destinations from '../components/Destinations';
 
 const Home = () => {
   return (
-    <div className="">
-      <Header />
+    <div className="relative">
+      <div className="fixed top-0 left-0 right-0 z-20">
+        <Header />
+      </div>
       <HomeBanner />
       <Imaginations />
       <Destinations />

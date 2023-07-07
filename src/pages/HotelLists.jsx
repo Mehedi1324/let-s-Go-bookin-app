@@ -5,21 +5,27 @@ import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import useFetch from '../hooks/useFetch';
+import { useBookingDetails } from '../context/SearchContext';
 
 const HotelLists = () => {
   const location = useLocation();
-  const [destination, setDestination] = useState(location?.state?.destination);
-
-  const [options, setOptions] = useState(location?.state?.options);
-  const [date, setDate] = useState(location?.state?.date);
-  const [min, setMin] = useState(undefined);
-  const [max, setMax] = useState(undefined);
+  const {
+    destination,
+    setDestination,
+    options,
+    setOptions,
+    date,
+    min,
+    max,
+    url,
+    setMin,
+    setMax,
+    hotelsUrl,
+    setDate,
+  } = useBookingDetails();
 
   const { data, loading, error, reFetch } = useFetch(
-    `https://letsgo-booking-app.onrender.com/api/hotels?city=${destination}&min=${
-      min || 0
-    }&max=${max || 999} 
-`
+    destination.length < 1 ? hotelsUrl : url
   );
   const handleFilterSearch = () => {
     reFetch();
@@ -27,17 +33,20 @@ const HotelLists = () => {
   return (
     <div>
       <Header />
-      <div className="w-[95%] md:w-[100%] mt-16 md:mt-[90px]  gap-1 flex flex-col md:flex-row md:mx-0 mx-auto">
+      <div className="w-[95%] md:w-[100%]   gap-1 flex flex-col md:flex-row md:mx-0 mx-auto">
         <div className="filter_section w-full md:w-[28%] lg:w-[25%]">
           <FilterSection
-            min={min}
-            max={max}
             setMax={setMax}
             handleClick={handleFilterSearch}
             setMin={setMin}
+            min={min}
+            max={max}
+            setDestination={setDestination}
             destination={destination}
             options={options}
+            setOptions={setOptions}
             date={date}
+            setDate={setDate}
           />
         </div>
         <div className="hotels w-full md:w-[72%] lg:w-[75%] ">

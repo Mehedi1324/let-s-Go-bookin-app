@@ -6,9 +6,9 @@ const FilterSection = ({
   destination,
   options,
   date,
-  min,
+  setDate,
+  setDestination,
   setMin,
-  max,
   setMax,
   handleClick,
 }) => {
@@ -21,6 +21,7 @@ const FilterSection = ({
           <div className="space-y-1">
             <p className="text-white">Destination</p>
             <input
+              onChange={(e) => setDestination(e.target.value.toLowerCase())}
               className="w-full h-8 px-3 rounded-sm bg-slate-800"
               type="text"
               placeholder={destination}

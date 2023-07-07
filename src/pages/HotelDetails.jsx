@@ -5,9 +5,9 @@ import Subscription from '../components/Subscription';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
-import { SearchContext } from '../context/SearchContext';
-import { AuthContext } from '../context/AuthContext';
+import { useBookingDetails } from '../context/SearchContext';
 import Reserve from '../components/Reserve';
+import { useAuth } from '../context/firebaseContext';
 
 const HotelDetails = () => {
   const [imgIndex, setImgIndex] = useState(0);
@@ -15,14 +15,15 @@ const HotelDetails = () => {
   const [openModal, setOpenModal] = useState(false);
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
-  const { date, options } = useContext(SearchContext);
-  const { user } = useContext(AuthContext);
+  const { date, options, setOptions } = useBookingDetails();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const { data, loading, error, reFetch } = useFetch(
-    `https://letsgo-booking-app.onrender.com/api/hotels/find/${id}`
+    `http://localhost:1010/api/hotels/find/${id}`
   );
 
+  console.log(data);
   // Full size photo slider_____________________
 
   const handleImgSlider = (i) => {
@@ -45,12 +46,12 @@ const HotelDetails = () => {
   const handleSlideArrow = (position) => {
     if (position === 'left') {
       if (imgIndex === 0) {
-        setImgIndex(5);
+        setImgIndex(data.photos.length - 1);
       } else {
         setImgIndex(imgIndex - 1);
       }
     } else {
-      if (imgIndex === 5) {
+      if (imgIndex === data.photos.length - 1) {
         setImgIndex(0);
       } else {
         setImgIndex(imgIndex + 1);
@@ -61,22 +62,25 @@ const HotelDetails = () => {
   // Convert dates to days____________________
 
   const MiliSecsPerDay = 1000 * 60 * 60 * 24;
+
   const dayDiffercence = (startDate, endDate) => {
-    const timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
+    const timeDifference =
+      Math.abs(endDate?.getTime() - startDate?.getTime()) + 1;
     const diffDays = Math.ceil(timeDifference / MiliSecsPerDay);
+
     return diffDays;
   };
-  const days = dayDiffercence(date[0].endDate, date[0].startDate);
-
+  const days = dayDiffercence(date[0]?.endDate, date[0]?.startDate);
+  console.log('days', days);
   // UI Rturns________________________________
 
   return (
-    <div className="mt-24">
+    <div>
       <Header />
       {loading ? (
         'Loading....'
       ) : (
-        <div className="space-y-5 mx-auto w-[95%] md:w-[90%] lg:w-[80%]">
+        <div className="space-y-5 mx-auto w-[95%] md:w-[90%] lg:w-[80%] mt-10">
           {/*________Img Slider________ */}
           {openSlide && (
             <div className="w-full h-full">
@@ -84,24 +88,26 @@ const HotelDetails = () => {
                 onClick={() => setOpenSlide(false)}
                 className="fixed top-0 bottom-0 left-0 right-0 w-full h-full cursor-pointer backdrop-brightness-50 backdrop-blur-sm"
               ></div>
-              <div className="fixed z-10 text-white  cursor-pointer top-[13%] bottom-[25%] md:bottom-[12%] md:left-[10%] left-[5%] right-[5%] md:right-[10%] lg:right-[18%] lg:left-[18%]">
-                <div className="flex m-1 space-x-5">
-                  <div
-                    onClick={() => handleSlideArrow('left')}
-                    className="px-2 py-1 text-xl font-bold bg-black hover:bg-green-600"
-                  >
-                    {'<'}
-                  </div>
-                  <div
-                    onClick={() => handleSlideArrow('right')}
-                    className="px-2 py-1 text-xl font-bold bg-black hover:bg-green-600"
-                  >
-                    {'>'}
+              <div className="fixed h-[60%] md:[70%] lg:h-[80%s] w-[90%] md:w-[70%] lg:w-[50%] z-10 text-white transform -translate-x-1/2 -translate-y-1/2 cursor-pointer top-1/2 left-1/2">
+                <div className="relative">
+                  <div className="flex m-1 space-x-5 ">
+                    <div
+                      onClick={() => handleSlideArrow('left')}
+                      className="absolute left-0 px-2 py-1 text-xl font-bold bg-black top-52 hover:bg-green-600"
+                    >
+                      {'<'}
+                    </div>
+                    <div
+                      onClick={() => handleSlideArrow('right')}
+                      className="absolute right-0 px-2 py-1 text-xl font-bold bg-black top-52 hover:bg-green-600"
+                    >
+                      {'>'}
+                    </div>
                   </div>
                 </div>
                 <img
                   className="w-full h-full shadow-custom-gray"
-                  src={data.photos[imgIndex].src}
+                  src={data.photos[imgIndex]}
                   alt=""
                 />
               </div>
@@ -179,7 +185,18 @@ const HotelDetails = () => {
       )}
       <Subscription />
       <Footer />
-      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
+      {openModal && (
+        <Reserve
+          options={options}
+          setOptions={setOptions}
+          data={data}
+          user={user}
+          days={days}
+          setOpenModal={setOpenModal}
+          openModal={openModal}
+          hotelId={id}
+        />
+      )}
     </div>
   );
 };

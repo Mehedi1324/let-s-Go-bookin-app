@@ -5,6 +5,7 @@ import HotelDetails from './pages/HotelDetails';
 import Error from './pages/Error';
 import ScrollToTop from './share/ScrollToTop';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/hotels" element={<HotelLists />} />
         <Route path="/hotels/:id" element={<HotelDetails />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
