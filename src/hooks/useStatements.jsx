@@ -15,13 +15,13 @@ const useStatements = () => {
     },
   ]);
 
-  const hotelsUrl = 'http://localhost:1010/api/hotels/all';
+  const hotelsUrl = 'https://letsgo-booking-app.onrender.com/api/hotels/all';
 
   const [destination, setDestination] = useState('');
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
 
-  const url = `http://localhost:1010/api/hotels?city=${destination}&min=${
+  const url = `https://letsgo-booking-app.onrender.com/api/hotels?city=${destination}&min=${
     min || 0
   }&max=${max || 999} 
 `;

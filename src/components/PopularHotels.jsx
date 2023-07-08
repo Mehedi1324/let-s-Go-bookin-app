@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const PopularHotels = () => {
   const navigate = useNavigate();
   const { data, loading, error } = useFetch(
-    'http://localhost:1010/api/hotels?featured=true'
+    'https://letsgo-booking-app.onrender.com/api/hotels?featured=true'
   );
   return (
     <div className="w-[95%] md:w-[90%] mx-auto pt-[60px] pb-14">
@@ -17,7 +17,7 @@ const PopularHotels = () => {
         <div className="grid grid-cols-1 mt-5 sm:grid-cols-2 gap-x-5 gap-y-9 md:grid-cols-3 lg:grid-cols-4">
           {data.map((item) => (
             <div
-              className="text-gray-900 bg-white rounded-b-lg shadow-custom-card"
+              className="overflow-hidden text-gray-900 duration-300 ease-in bg-white rounded-lg hover:scale-95 shadow-custom-card"
               key={item._id}
             >
               <img

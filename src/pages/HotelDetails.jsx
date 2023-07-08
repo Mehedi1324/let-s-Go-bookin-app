@@ -20,7 +20,7 @@ const HotelDetails = () => {
   const navigate = useNavigate();
 
   const { data, loading, error, reFetch } = useFetch(
-    `http://localhost:1010/api/hotels/find/${id}`
+    `https://letsgo-booking-app.onrender.com/api/hotels/find/${id}`
   );
 
   console.log(data);

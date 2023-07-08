@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Destinations = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-[95%] md:w-[90%] mx-auto space-y-5 pt-10">
       <div>
@@ -17,7 +19,10 @@ const Destinations = () => {
               <h1 className="text-[35px] font-semibold pb-4">
                 Up to 50% off on <br /> Honeymoon packages
               </h1>
-              <button className="bg-blue-500  shadow-custom-dark hover:bg-[#211d1d8b] text-[16px] font-semibold px-5 rounded-full py-2">
+              <button
+                onClick={() => navigate('/hotels')}
+                className="bg-blue-500  shadow-custom-dark hover:bg-[#211d1d8b] text-[16px] font-semibold px-5 rounded-full py-2"
+              >
                 Book Now
               </button>
             </div>

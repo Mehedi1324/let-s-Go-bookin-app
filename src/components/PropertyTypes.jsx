@@ -29,7 +29,7 @@ const PropertyTypes = () => {
             images.map((img, i) => (
               <div
                 key={i}
-                className="relative transition-all rounded-lg cursor-pointer hover:scale-110 "
+                className="relative transition-all duration-300 ease-in rounded-lg cursor-pointer hover:scale-95"
               >
                 <img
                   src={img}
