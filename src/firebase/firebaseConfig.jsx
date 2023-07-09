@@ -1,13 +1,13 @@
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCZh7Rt8-daTRkrLCKRIE7eMdUbbtt1G2E',
-  authDomain: 'lets-go-booking-app.firebaseapp.com',
-  projectId: 'lets-go-booking-app',
-  storageBucket: 'lets-go-booking-app.appspot.com',
-  messagingSenderId: '1004284436703',
-  appId: '1:1004284436703:web:059fbf55b79d02916f096a',
-  measurementId: 'G-PY55YJPKH5',
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase_____________

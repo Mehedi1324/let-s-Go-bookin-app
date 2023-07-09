@@ -50,7 +50,7 @@ const HotelLists = () => {
           />
         </div>
         <div className="hotels w-full md:w-[72%] lg:w-[75%] ">
-          {data.map((item) => (
+          {data?.map((item) => (
             <Hotels item={item} loading={loading} key={item._id} />
           ))}
         </div>

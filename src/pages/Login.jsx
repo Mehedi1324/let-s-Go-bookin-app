@@ -4,7 +4,7 @@ import { FaFacebookF } from 'react-icons/fa';
 
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import { useAuth } from '../context/firebaseContext';
+import { useAuth } from '../context/AuthContext';
 const Login = () => {
   const navigate = useNavigate();
   const {

@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import { SearchContextProvider } from './context/SearchContext';
-import { FirebaseContext } from './context/firebaseContext';
+import FirebaseContextProvider from './context/AuthContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <FirebaseContext>
+  <FirebaseContextProvider>
     <SearchContextProvider>
       <App />
     </SearchContextProvider>
-  </FirebaseContext>
+  </FirebaseContextProvider>
 );

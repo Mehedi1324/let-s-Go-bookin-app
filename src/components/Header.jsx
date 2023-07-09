@@ -10,7 +10,7 @@ import {
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/firebaseContext';
+import { useAuth } from '../context/AuthContext';
 const Header = () => {
   // _______________________________
 

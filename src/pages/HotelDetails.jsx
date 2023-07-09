@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import { useBookingDetails } from '../context/SearchContext';
 import Reserve from '../components/Reserve';
-import { useAuth } from '../context/firebaseContext';
+import { useAuth } from '../context/AuthContext';
 
 const HotelDetails = () => {
   const [imgIndex, setImgIndex] = useState(0);
@@ -142,7 +142,7 @@ const HotelDetails = () => {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-            {data.photos?.map((photo, i) => (
+            {data?.photos?.map((photo, i) => (
               <img
                 className="cursor-pointer"
                 onClick={() => handleImgSlider(i)}

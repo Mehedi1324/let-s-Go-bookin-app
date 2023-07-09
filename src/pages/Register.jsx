@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { FaCog, FaFacebookF } from 'react-icons/fa';
-import { useAuth } from '../context/firebaseContext';
+import { useAuth } from '../context/AuthContext';
 // import useFirebase from '../firebase/useFirebase';
 const Register = () => {
   const {

@@ -15,7 +15,7 @@ const PopularHotels = () => {
         'Loading....'
       ) : (
         <div className="grid grid-cols-1 mt-5 sm:grid-cols-2 gap-x-5 gap-y-9 md:grid-cols-3 lg:grid-cols-4">
-          {data.map((item) => (
+          {data?.map((item) => (
             <div
               className="overflow-hidden text-gray-900 duration-300 ease-in bg-white rounded-lg hover:scale-95 shadow-custom-card"
               key={item._id}

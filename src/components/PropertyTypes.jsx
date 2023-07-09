@@ -26,7 +26,7 @@ const PropertyTypes = () => {
       ) : (
         <div className="grid grid-cols-3 gap-5 mx-auto md:grid-cols-4 lg:grid-cols-5">
           {data &&
-            images.map((img, i) => (
+            images?.map((img, i) => (
               <div
                 key={i}
                 className="relative transition-all duration-300 ease-in rounded-lg cursor-pointer hover:scale-95"
